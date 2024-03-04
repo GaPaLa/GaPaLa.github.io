@@ -45,6 +45,11 @@
             margin: auto;
             padding: 20px;
         }
+        img {
+            margin: 80px;
+            max-width: 60%;
+            height: auto;
+        }
     </style>
 </head>
 
@@ -80,8 +85,8 @@
             const img = document.createElement('img');
             img.src = photoDirectory + photo;
             img.alt = photo;
-            img.style.margin = "20px"; // Add spacing between images (adjust as needed)
-            img.style.maxWidth = "90%"; // Ensure images are not too large
+            img.style.margin = "80px"; // Add spacing between images (adjust as needed)
+            img.style.maxWidth = "60%"; // Ensure images are not too large
             img.style.height = "auto"; // Maintain aspect ratio
             photoGallery.appendChild(img);
         });
