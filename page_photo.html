@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photography</title>
+    <style>
+        body {
+            background-color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+        img {
+            margin: 20px;
+            max-width: 90%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="photoGallery"></div>
+    <script>
+        const photoGallery = document.getElementById('photoGallery');
+        const photoDirectory = 'https://raw.githubusercontent.com/gapala/gapala.github.io/main/photos/';
+
+        // Fetch the list of files from your repository (this part needs to be adjusted to your actual repo structure)
+        // This example assumes you have a static list or you manage the list manually
+        // GitHub does not provide a direct API to list directory contents for static sites
+        const photos = ['photo1.jpg', 'photo2.jpg', 'photo3.jpg']; // Add your photo filenames here
+
+        photos.sort(); // Sort photos alphabetically
+
+        photos.forEach(photo => {
+            const img = document.createElement('img');
+            img.src = photoDirectory + photo;
+            img.alt = photo;
+            photoGallery.appendChild(img);
+        });
+    </script>
+</body>
+</html>
