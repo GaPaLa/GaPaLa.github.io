@@ -3,21 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Photography</title>
+    <title>GaPaLa Blog</title>
     <style>
         body {
-            background-color: #fff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
             text-align: center;
             padding: 20px;
+            background-color: #333;
+            color: #fff;
         }
-        img {
-            margin: 20px;
-            max-width: 90%;
-            height: auto;
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav ul li a:hover {
+            color: #ccc;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
         }
     </style>
 </head>
+
 <body>
+
+    <header>
+        <h1></h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="ai.html">AI Research</a></li>
+                <li><a href="photography.html">Photography</a></li>
+                <li><a href="crt.html">CRT Monitors</a></li>
+                <li><a href="misc.html">Misc.</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    
     <div id="photoGallery"></div>
     <script>
         const photoGallery = document.getElementById('photoGallery');
@@ -34,6 +80,9 @@
             const img = document.createElement('img');
             img.src = photoDirectory + photo;
             img.alt = photo;
+            img.style.margin = "20px"; // Add spacing between images (adjust as needed)
+            img.style.maxWidth = "90%"; // Ensure images are not too large
+            img.style.height = "auto"; // Maintain aspect ratio
             photoGallery.appendChild(img);
         });
     </script>
