@@ -45,12 +45,20 @@
             margin: auto;
             padding: 20px;
         }
-        img {
-            margin: 80px;
-            max-width: 60%;
-            height: auto;
+        #photoGallery {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* This will center the images vertically */
         }
-    </style>
+
+        img {
+            display: block; /* Make images block-level elements */
+            margin: 40px auto; /* Increase spacing and center horizontally */
+            max-width: 90%; /* Adjust as needed */
+            height: auto; /* Maintain aspect ratio */
+        }
+
+</style>
 </head>
 
 <body>
@@ -85,9 +93,6 @@
             const img = document.createElement('img');
             img.src = photoDirectory + photo;
             img.alt = photo;
-            img.style.margin = "80px"; // Add spacing between images (adjust as needed)
-            img.style.maxWidth = "60%"; // Ensure images are not too large
-            img.style.height = "auto"; // Maintain aspect ratio
             photoGallery.appendChild(img);
         });
     </script>
