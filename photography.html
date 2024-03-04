@@ -93,7 +93,21 @@
             const img = document.createElement('img');
             img.src = photoDirectory + photo;
             img.alt = photo;
-            photoGallery.appendChild(img);
+
+            img.onload = function() {
+                const aspectRatio = this.width / this.height;
+                const viewportAspectRatio = window.innerWidth / window.innerHeight;
+
+                if (aspectRatio > viewportAspectRatio) {
+                    this.style.maxWidth = '90vw';
+                    this.style.maxHeight = 'auto';
+                } else {
+                    this.style.maxWidth = 'auto';
+                    this.style.maxHeight = '90vh';
+                }
+
+                photoGallery.appendChild(img);
+            };
         });
     </script>
 </body>
