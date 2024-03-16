@@ -74,7 +74,9 @@
             </ul>
         </nav>
     </header>
+
     
+    <div id="photoGallery"></div>
     <script>
         const photoGallery = document.getElementById('photoGallery');
         const photoDirectory = 'https://raw.githubusercontent.com/GaPaLa/GaPaLa.github.io/main/photos/';
@@ -87,11 +89,7 @@
             const img = document.createElement('img');
             img.src = photoDirectory + photo;
             img.alt = photo;
-            
-            // Apply any initial styles or attributes you want immediately, before the image has loaded
-            img.style.maxWidth = '90%';
-            img.style.height = 'auto';
-    
+                
             img.onload = function() {
                 // Now, the onload function can adjust styles based on the image's properties
                 const aspectRatio = this.width / this.height;
@@ -110,7 +108,5 @@
             photoGallery.appendChild(img);
         });
     </script>
-    
-    
 </body>
 </html>
