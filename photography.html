@@ -10,6 +10,7 @@
             margin: 0;
             padding: 0;
             background-color: #fff;
+            overflow-y: scroll; /* Enable vertical scrolling */
         }
 
         header {
@@ -45,72 +46,74 @@
             margin: auto;
             padding: 20px;
         }
+
         #photoGallery {
-            display: flex;
-            flex-direction: column;
-            align-items: center; /* This will center the images vertically */
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); /* Two columns with minimum width of 400px */
+            gap: 20px; /* Gap between images */
+            padding: 20px;
+            box-sizing: border-box;
         }
 
         img {
-            display: block; /* Make images block-level elements */
-            margin: 80px auto; /* Increase spacing and center horizontally */
-            max-width: 90%; /* Adjust as needed */
-            height: auto; /* Maintain aspect ratio */
+            display: block;
+            max-width: 100%;
+            height: auto;
         }
 
-</style>
+    </style>
 </head>
-
 <body>
 
-    <header>
-        <h1></h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="ai.html">AI Research</a></li>
-                <li><a href="photography.html">Photography</a></li>
-                <li><a href="misc.html">Misc.</a></li>
-            </ul>
-        </nav>
-    </header>
+<header>
+    <h1></h1>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="ai.html">AI Research</a></li>
+            <li><a href="photography.html">Photography</a></li>
+            <li><a href="misc.html">Misc.</a></li>
+        </ul>
+    </nav>
+</header>
 
-    
+<div class="container">
     <div id="photoGallery"></div>
-    <script>
-        const photoGallery = document.getElementById('photoGallery');
-        const photoDirectory = 'https://raw.githubusercontent.com/GaPaLa/GaPaLa.github.io/main/photos/';
-    
-        const photos = ['1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', 
-                        '6.jpg', '7.jpg', '8.jpg', '9.jpg', '10.jpg', '11.jpg', 
-                        '12.jpg', '13.jpg', '14.jpg', '15.jpg', '16.jpg', '17.jpg', 
-                        '18.jpg', '19.jpg', '20.jpg', '21.jpg', '22.jpg', '23.jpg', 
-                        '24.jpg', '25.jpg', '26.jpg', '27.jpg', '28.jpg', '29.jpg', 
-                        '30.jpg', '31.jpg', '32.jpg', '33.jpg', '34.jpg', '35.jpg',
-                        '36.jpg'];
-                        
-            photos.forEach(photo => {
-            const img = document.createElement('img');
-            img.src = photoDirectory + photo;
-            img.alt = photo;
-                
-            img.onload = function() {
-                // Now, the onload function can adjust styles based on the image's properties
-                const aspectRatio = this.width / this.height;
-                const viewportAspectRatio = window.innerWidth / window.innerHeight;
-    
-                if (aspectRatio > viewportAspectRatio) {
-                    this.style.maxWidth = '90vw';
-                    this.style.maxHeight = 'auto';
-                } else {
-                    this.style.maxWidth = 'auto';
-                    this.style.maxHeight = '90vh';
-                }
-            };
-    
-            // Append the img element immediately to keep the order consistent
-            photoGallery.appendChild(img);
-        });
-    </script>
+</div>
+
+<script>
+    const photoGallery = document.getElementById('photoGallery');
+    const photoDirectory = 'https://raw.githubusercontent.com/GaPaLa/GaPaLa.github.io/main/photos/';
+
+    const photos = ['1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', 
+                    '6.jpg', '7.jpg', '8.jpg', '9.jpg', '10.jpg', '11.jpg', 
+                    '12.jpg', '13.jpg', '14.jpg', '15.jpg', '16.jpg', '17.jpg', 
+                    '18.jpg', '19.jpg', '20.jpg', '21.jpg', '22.jpg', '23.jpg', 
+                    '24.jpg', '25.jpg', '26.jpg', '27.jpg', '28.jpg', '29.jpg', 
+                    '30.jpg', '31.jpg', '32.jpg', '33.jpg', '34.jpg', '35.jpg',
+                    '36.jpg'];
+
+    photos.forEach(photo => {
+        const img = document.createElement('img');
+        img.src = photoDirectory + photo;
+        img.alt = photo;
+
+        img.onload = function() {
+            // Now, the onload function can adjust styles based on the image's properties
+            const aspectRatio = this.width / this.height;
+            const viewportAspectRatio = window.innerWidth / window.innerHeight;
+
+            if (aspectRatio > viewportAspectRatio) {
+                this.style.maxWidth = '90%';
+                this.style.maxHeight = 'auto';
+            } else {
+                this.style.maxWidth = 'auto';
+                this.style.maxHeight = '90vh';
+            }
+        };
+
+        photoGallery.appendChild(img);
+    });
+</script>
 </body>
 </html>
