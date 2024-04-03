@@ -10,7 +10,7 @@
             margin: 0;
             padding: 0;
             background-color: #fff;
-            overflow-y: scroll; /* Enable vertical scrolling */
+            overflow-y: scroll;
         }
 
         header {
@@ -42,25 +42,30 @@
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 85%;
             margin: auto;
             padding: 20px;
         }
 
         #photoGallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); /* Two columns with minimum width of 400px */
-            gap: 20px; /* Gap between images */
-            padding: 20px;
+            column-count: 2; /* Create two columns */
+            column-gap: 5%; /* Gap between columns */
+            max-width: 100%;
+            padding: 0%;
             box-sizing: border-box;
         }
 
-        img {
-            display: block;
-            max-width: 100%;
-            height: auto;
+        .photoItem {
+            break-inside: avoid-column; /* Prevent breaking images across columns */
+            page-break-inside: avoid; /* For older browsers */
+            -webkit-column-break-inside: avoid; /* For WebKit browsers */
+            margin-bottom: 10%; /* Space between images */
         }
 
+        img {
+            width: 100%; /* Make images fill their containers */
+            height: auto;
+        }
     </style>
 </head>
 <body>
@@ -94,25 +99,15 @@
                     '36.jpg'];
 
     photos.forEach(photo => {
+        const imgWrapper = document.createElement('div');
+        imgWrapper.classList.add('photoItem');
+
         const img = document.createElement('img');
         img.src = photoDirectory + photo;
         img.alt = photo;
+        imgWrapper.appendChild(img);
 
-        img.onload = function() {
-            // Now, the onload function can adjust styles based on the image's properties
-            const aspectRatio = this.width / this.height;
-            const viewportAspectRatio = window.innerWidth / window.innerHeight;
-
-            if (aspectRatio > viewportAspectRatio) {
-                this.style.maxWidth = '90%';
-                this.style.maxHeight = 'auto';
-            } else {
-                this.style.maxWidth = 'auto';
-                this.style.maxHeight = '90vh';
-            }
-        };
-
-        photoGallery.appendChild(img);
+        photoGallery.appendChild(imgWrapper);
     });
 </script>
 </body>
