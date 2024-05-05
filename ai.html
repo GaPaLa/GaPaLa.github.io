@@ -70,41 +70,46 @@
         <h2 id="title">Here are the most important papers and thoughts on my mind atm</h2>
     
         <h3>Parallelism and Transformer Limitations</h3>
-        <p>Architectures with parallelism across the sequence length may force each target token to only have a fixed amount of compute available to compute it, making solving multi-step problems (generalizably) past a certain algorithmic complexity impossible, or take more layers than it would with recursion (slowing down learning?).</p>
+        <p>Architectures with parallelism across the sequence length may always force each target token to only have a fixed amount of compute available to be used for it, making solving multi-step problems past a certain algorithmic complexity impossible. Even with enough layers to fit the problem, it takes more layers than it would with recursion (hence why we see high redundancy across transformer layers - you need an addition function at layer N and N+1 to do 2 iterations of addition. I suspect), doesn't generalize to longer ones, and slows down learning ( I suspect. bc re-using the same layer recurrently gives it more informed gradients per param?). Suspicions are based on my own thoughts and <a href="https://arxiv.org/abs/2309.01826">One Wide Feedforward is All You Need</a></p>
         <ul>
-            <li>The Illusion of State in State-Space Models - <a href="https://arxiv.org/abs/2404.08819">https://arxiv.org/abs/2404.08819</a></li>
-            <li>The New XOR Problem - <a href="https://openreview.net/forum?id=HgOJlxzB16">https://openreview.net/forum?id=HgOJlxzB16</a></li>
+            <li><a href="https://arxiv.org/abs/2404.08819">The Illusion of State in State-Space Models </a></li>
+            <li><a href="https://openreview.net/forum?id=HgOJlxzB16">The New XOR Problem</a></li>
         </ul>
     
-        <p>This doesn't matter if you break down the problems in the dataset sufficiently such that the complexity required to calculate each token is within your limit, but obvs we can't just write a CoT pretraining dataset.</p>
+        <p>This doesn't matter if you break down the problems in the dataset sufficiently such that the complexity required to calculate each token is within your limit, but we can't feasibly add CoT to a whole pretraining dataset.</p>
         <ul>
-            <li>The Expressive Power of Transformers with Chain of Thought - <a href="https://iopscience.iop.org/article/10.1088/1361-648X/ab8849/meta">https://iopscience.iop.org/article/10.1088/1361-648X/ab8849/meta</a></li>
-            <li>Teaching Arithmetic to Small Transformers - <a href="https://arxiv.org/abs/2307.03381">https://arxiv.org/abs/2307.03381</a></li>
-            <li>You can't just add blank tokens though, they have to meaningfully bring information back down, acting as recurrence in place of having model do this internally <a href="https://arxiv.org/abs/2404.08819">https://arxiv.org/abs/2404.08819</a>, <a href="https://www.researchgate.net/publication/373318425_Structured_Kernel_Estimation_for_Photon-Limited_Deconvolution">https://www.researchgate.net/publication/373318425_Structured_Kernel_Estimation_for_Photon-Limited_Deconvolution</a></li>
+            <li><a href="https://iopscience.iop.org/article/10.1088/1361-648X/ab8849/meta">The Expressive Power of Transformers with Chain of Thought</a></li>
+            <li><a href="https://arxiv.org/abs/2307.03381">Teaching Arithmetic to Small Transformers</a></li>
+        </ul>
+
+        <p>You can't just add blank tokens though - the CoT tokens have to meaningfully bring information back down, acting as recurrence in place of having model do this internally.</p>
+        <ul>
+            <li><a href="https://arxiv.org/abs/2404.15758v1">Let's Think Dot by Dot: Hidden Computation in Transformer Language Models</a> (the related work section clears this up well)
         </ul>
     
         <h3>Limits of SGD's Ability to Generalize OOD</h3>
         <ul>
-            <li>The "'A is B' Reversal Curse" - <a href="https://arxiv.org/pdf/2210.05075">https://arxiv.org/pdf/2210.05075</a></li>
-            <li>(+ my own work coming out soon that confirms the above and tries to make use of ICL to work side-by-side with SGD across pretraining)</li>
+            <li><a href="https://arxiv.org/pdf/2210.05075">The "A is B Reversal Curse"</a></li>
+            <li>(+ my own work (coming soon!) that confirms the above and tries to make use of ICL to work side-by-side with SGD across pretraining).</li>
         </ul>
         
-        <p>More work around this topic is done under the title of "Memory-Augmented Neural Networks" - MANNs</p>
+        <p>More work around this topic is done under the title of "Memory-Augmented Neural Networks" - MANNs.</p>
         <ul>
-            <li>Meta-Learning with Memory-Augmented Neural Networks - <a href="https://proceedings.mlr.press/v48/santoro16.pdf">https://proceedings.mlr.press/v48/santoro16.pdf</a></li>
+            <li><a href="https://proceedings.mlr.press/v48/santoro16.pdf">Meta-Learning with Memory-Augmented Neural Networks</a></li>
         </ul>
     
         <h3>Is Polysemanticity the cause of adversarial brittleness?</h3>
+        <p>I think this is different from OOD issues because this enables adversarial examples with very minimal changes, which I would count as iid. I think it's that polysemanticity --> features aren't orthogonal --> there is always a non-zero gradient to get any behaviour from some input perturbation that is irrelevant to that behaviour.</p>
         <ul>
-            <li>Toy Models of Superposition: This paper explores toy models related to superposition - <a href="https://arxiv.org/abs/2209.10652">https://arxiv.org/abs/2209.10652</a></li>
+            <li><a href="https://arxiv.org/abs/2209.10652">Toy Models of Superposition</a></li>
         </ul>
     
 
-        <h3> Also, we need alternatives to next-token prediction</h3>
-        <p> LM loss encourages sticking IID, but we actually want the model to continually achieve new, harder-to-reach goals that it has never seen before, which will require doing new things it hasn't seen before. Also avoids degeneracy of teacher-forcing.</p>
+        <h3>Also, we need alternatives to next-token prediction</h3>
+        <p>LM loss encourages sticking IID, but we actually want the model to continually achieve new, harder-to-reach goals that it has never seen before, which will require doing new things it hasn't seen before. Also avoids degeneracy of teacher-forcing.</p>
         <ul>
-            <li>Calibrated Language Models Must Hallucinate - <a href="https://arxiv.org/abs/2311.14648">https://arxiv.org/abs/2311.14648</a></li>
-            <li>RL > LM - <a href="https://www.youtube.com/watch?v=hhiLw5Q_UFg">https://www.youtube.com/watch?v=hhiLw5Q_UFg</a></li>
+            <li><a href="https://arxiv.org/abs/2311.14648">Calibrated Language Models Must Hallucinate</a></li>
+            <li><a href="https://www.youtube.com/watch?v=hhiLw5Q_UFg">Talk on RLHF vs finetuning by John Schulman</a></li>
         </ul>
     
     </div>
