@@ -18,21 +18,8 @@ def rescale_image(input_path, output_path, target_size_kb, max_dimension):
         
         quality = 95  # Start with high quality
         
-        while True:
-            # Save the image to the output path with the current quality
-            img.save(output_path, 'JPEG', quality=quality)
-            
-            # Check the size of the saved image
-            size_kb = os.path.getsize(output_path) / 1024
-            
-            # If the size is less than or equal to the target size, stop the loop
-            if size_kb <= target_size_kb:
-                break
-            
-            # Otherwise, decrease the quality
-            quality -= 5
-            if quality < 5:
-                break  # Prevent quality from going to 0
+        # Save the image to the output path with the current quality
+        img.save(output_path, 'JPEG', quality=quality)
 
 # Process each image in the input folder
 for filename in os.listdir(input_folder):
