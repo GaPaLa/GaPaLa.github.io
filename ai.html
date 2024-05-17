@@ -73,12 +73,12 @@
         <p>Architectures with parallelism across the sequence length may always force each target token to only have a fixed amount of compute available to be used for it, making solving multi-step problems past a certain algorithmic complexity impossible. Even with enough layers to fit the problem, it takes more layers than it would with recursion (hence why we see high redundancy across transformer layers - you need an addition function at layer N and N+1 to do 2 iterations of addition. I suspect), doesn't generalize to longer ones, and slows down learning ( I suspect. bc re-using the same layer recurrently gives it more informed gradients per param?). Suspicions are based on my own thoughts and <a href="https://arxiv.org/abs/2309.01826">One Wide Feedforward is All You Need</a></p>
         <ul>
             <li><a href="https://arxiv.org/abs/2404.08819">The Illusion of State in State-Space Models </a></li>
-            <li><a href="https://openreview.net/forum?id=HgOJlxzB16">The New XOR Problem</a></li>
+            <li><a href="http://www.wtf.sg/posts/2023-02-03-the-new-xor-problem/">The New XOR Problem</a></li>
         </ul>
     
         <p>This doesn't matter if you break down the problems in the dataset sufficiently such that the complexity required to calculate each token is within your limit, but we can't feasibly add CoT to a whole pretraining dataset.</p>
         <ul>
-            <li><a href="https://iopscience.iop.org/article/10.1088/1361-648X/ab8849/meta">The Expressive Power of Transformers with Chain of Thought</a></li>
+            <li><a href="https://arxiv.org/abs/2310.07923">The Expressive Power of Transformers with Chain of Thought</a></li>
             <li><a href="https://arxiv.org/abs/2307.03381">Teaching Arithmetic to Small Transformers</a></li>
         </ul>
 
