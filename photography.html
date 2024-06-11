@@ -24,6 +24,8 @@
             list-style-type: none;
             padding: 0;
             margin: 0;
+            text-align: center; /* Center the navigation items */
+
         }
 
         nav ul li {
@@ -44,12 +46,13 @@
         .container {
             max-width: 85%;
             margin: auto;
-            padding: 20px;
+            padding: 10px;
+            text-align: center; /* Center the navigation items */
         }
 
         #photoGallery {
             column-count: 1; /* Create two columns */
-            column-gap: 7%; /* Gap between columns */
+            column-gap: 5%; /* Gap between columns */
             max-width: 100%;
             padding: 0%;
             box-sizing: border-box;
@@ -59,11 +62,13 @@
             break-inside: avoid-column; /* Prevent breaking images across columns */
             page-break-inside: avoid; /* For older browsers */
             -webkit-column-break-inside: avoid; /* For WebKit browsers */
-            margin-bottom: 17%; /* Space between images */
+            margin-bottom: 14%; /* Space between images */
         }
 
         img {
-            width: 100%; /* Make images fill their containers */
+            max-width: 100%;
+            max-height: 80vh; /* Ensure images fit within the viewport height */
+            width: auto;
             height: auto;
         }
     </style>
@@ -71,7 +76,7 @@
 <body>
 
 <header>
-    <h1></h1>
+    <h1>GaPaLa Blog</h1>
     <nav>
         <ul>
             <li><a href="index.html">Home</a></li>
