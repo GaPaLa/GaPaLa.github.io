@@ -68,21 +68,22 @@
 
     <div class="container">
         <h2 id="title">Here are the most important papers and thoughts on my mind atm</h2>
+        <h4>(warning: lots of jargon ahead. Requires reading on deep learning in general; the transformer architecture; causal language models; chain-of-thought prompting; intuition on Chollet's 'On The Measure Of Intelligence' (see his latest appearance on Dwarkesh Patel's podcast); shallow but broad intuition of deep reinforcement learning)</h4>
     
-        <h3>Parallelism and Transformer Limitations</h3>
-        <p>Architectures with parallelism across the sequence length may always force each target token to only have a fixed amount of compute available to be used for it, making solving multi-step problems past a certain algorithmic complexity impossible. Even with enough layers to fit the problem, it takes more layers than it would with recursion (hence why we see high redundancy across transformer layers - you need an addition function at layer N and N+1 to do 2 iterations of addition. I suspect), doesn't generalize to longer ones, and slows down learning ( I suspect. bc re-using the same layer recurrently gives it more informed gradients per param?). Suspicions are based on my own thoughts and <a href="https://arxiv.org/abs/2309.01826">One Wide Feedforward is All You Need</a></p>
+        <h3>Limitations to the Expressiveness of Parallel Architectures (e.g. Transformers/SSMs)</h3>
+        <p>Architectures which are parallelisable across the length of the input sequence may fix the amount of compute available to calculate each given target token, making solving multi-step problems past a certain algorithmic space/time complexity (for a sufficiently large N in O(N)) impossible. Even with enough layers to fit the problem, it takes more layers (i.e. parameters - not including recursion) than it would with recursion (hence why we see high redundancy across transformer layers; given that a layer cannot fit more than one additio circuit you would need an addition function at layer N and N+1 to do 2 iterations of addition, ass opposed to re-using a single implementation of addition repeatedly.); it doesn't generalize to longer sequences than those trained on; and I suspect it slows down learning (re-using the same layer recurrently gives it more informed gradients per param and per daata sample?). Suspicions are based on my own thoughts and <a href="https://arxiv.org/abs/2309.01826">One Wide Feedforward is All You Need</a></p>
         <ul>
             <li><a href="https://arxiv.org/abs/2404.08819">The Illusion of State in State-Space Models </a></li>
             <li><a href="http://www.wtf.sg/posts/2023-02-03-the-new-xor-problem/">The New XOR Problem</a></li>
         </ul>
     
-        <p>This doesn't matter if you break down the problems in the dataset sufficiently such that the complexity required to calculate each token is within your limit, but we can't feasibly add CoT to a whole pretraining dataset.</p>
+        <p>This depth-ceiling expressivity issue doesn't matter if you break down the problems in the dataset sufficiently across multiple tokens such that the complexity required to calculate each individual token is within the depth limit, but we can't feasibly add CoT tokens with these compelxity guarantees to a whole pretraining dataset.</p>
         <ul>
             <li><a href="https://arxiv.org/abs/2310.07923">The Expressive Power of Transformers with Chain of Thought</a></li>
             <li><a href="https://arxiv.org/abs/2307.03381">Teaching Arithmetic to Small Transformers</a></li>
         </ul>
 
-        <p>You can't just add blank tokens though - the CoT tokens have to meaningfully bring information back down, acting as recurrence in place of having model do this internally.</p>
+        <p>You also can't just add blank tokens - the CoT tokens have to meaningfully bring information 'back down' from target to input, acting as recurrence in place of having model do this internally.</p>
         <ul>
             <li><a href="https://arxiv.org/abs/2404.15758v1">Let's Think Dot by Dot: Hidden Computation in Transformer Language Models</a> (the related work section clears this up well)
         </ul>
@@ -111,6 +112,7 @@
             <li><a href="https://arxiv.org/abs/2311.14648">Calibrated Language Models Must Hallucinate</a></li>
             <li><a href="https://www.youtube.com/watch?v=hhiLw5Q_UFg">Talk on RLHF vs finetuning by John Schulman</a></li>
         </ul>
+        <p>Active inference seems the way forward. Just need an architecture with good enough expressivity; long-range meta-learning (continual learning); a good RL environment; and an efficient training pipeline. So, everything :/\/\/</p>
     
     </div>
     
