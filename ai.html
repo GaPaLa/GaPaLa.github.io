@@ -94,7 +94,7 @@
         <h3>Limits of SGD's Ability to Generalize OOD</h3>
         <ul>
             <li><a href="https://arxiv.org/pdf/2210.05075">The "A is B Reversal Curse"</a></li>
-            <li>(+ my own work (coming soon!) that confirms the above and tries to make use of ICL to work side-by-side with SGD across pretraining).</li>
+            <li>(+ my undergrad diss that confirms the above and tries (& fails) to make use of ICL to work side-by-side with SGD across pretraining).</li>
         </ul>
         
         <p>More work around this topic is done under the title of "Memory-Augmented Neural Networks" - MANNs.</p>
@@ -109,8 +109,8 @@
         </ul>
     
 
-        <h3>Also, we need alternatives to next-token prediction</h3>
-        <p>LM loss encourages sticking IID, but we actually want the model to continually achieve new, harder-to-reach goals that it has never seen before, which will require doing new things it hasn't seen before. Also avoids degeneracy of teacher-forcing.</p>
+        <h3>Also, we need alternatives to next-token prediction - (2025 update: things seem to be going in this direction now with the use of RL)</h3>
+        <p>LM loss encourages sticking IID, but we actually want the model to continually achieve new, harder-to-reach goals that it has never seen before, which will require doing new things it hasn't seen before. Also avoids the inconsistent internal hiddens states which teacher-forcing encourages (if you read half a sentence and think the rest of it may go one way but it actually goes another, the transformer is forced to learn how to consider both options to always get both right and so its internal state is forced to not commit - humans have it much easier). Also, if you are trained on next-token prediciton, making educated guesses and confidently declaring them as fact gets better performance than saying "I don't know". </p>
         <ul>
             <li><a href="https://arxiv.org/abs/2311.14648">Calibrated Language Models Must Hallucinate</a></li>
             <li><a href="https://www.youtube.com/watch?v=hhiLw5Q_UFg">Talk on RLHF vs finetuning by John Schulman</a></li>
